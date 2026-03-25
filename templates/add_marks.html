@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 500px; margin: 40px auto;">
+    <h2 style="color: #2c3e50; margin-top: 0; text-align: center;">Upload Marks</h2>
+    
+    <form method="POST" action="{{ url_for('add_marks') }}">
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Select Student</label>
+            <select name="student_id" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="" disabled selected>-- Choose a student --</option>
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.name }} ({{ student.roll_number }}) - {{ student.course }}</option>
+                {% else %}
+                <option value="" disabled>No students found in database</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Subject Name</label>
+            <input type="text" name="subject" required placeholder="e.g. Mathematics" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        
+        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+            <div style="flex: 1;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Marks Obtained</label>
+                <input type="number" name="marks_obtained" required min="0" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+            </div>
+            <div style="flex: 1;">
+                <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Total Marks</label>
+                <input type="number" name="total_marks" required min="1" value="100" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+            </div>
+        </div>
+        
+        <button type="submit" style="width: 100%; padding: 12px; background: #27ae60; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold;">Submit Marks</button>
+    </form>
+</div>
+{% endblock %}
