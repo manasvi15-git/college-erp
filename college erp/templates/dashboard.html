@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2>Welcome Home 🏡</h2>
+    <p>Logged in successfully as <strong>{{ username }}</strong>.</p>
+</div>
+
+<div class="grid-cards">
+    {% if role == 'admin' %}
+    <div class="card card-admin">
+        <h3>⚙️ Administration</h3>
+        <ul>
+            <li><a href="{{ url_for('register') }}">➕ Add New User</a></li>
+            <li><a href="{{ url_for('students') }}">📋 Manage Students</a></li>
+            <li><a href="#">🛠️ Settings</a></li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if role in ['admin', 'teacher'] %}
+    <div class="card card-teacher">
+        <h3>📚 Academics</h3>
+        <ul>
+            <li><a href="{{ url_for('mark_attendance') }}">📅 Take Attendance</a></li>
+            <li><a href="{{ url_for('add_marks') }}">📝 Upload Marks</a></li>
+            <li><a href="{{ url_for('attendance_report') }}">📊 Attendance Reports</a></li>
+            <li><a href="{{ url_for('view_marks') }}">🏆 View Grades</a></li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if role == 'student' %}
+    <div class="card card-student">
+        <h3>🎓 My Portal</h3>
+        <ul>
+            <li><a href="{{ url_for('attendance_report') }}">📅 View My Attendance</a></li>
+            <li><a href="{{ url_for('view_marks') }}">🏆 View My Grades</a></li>
+            <li><a href="#">📜 Download Report Card</a></li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

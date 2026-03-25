@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 400px; margin: 40px auto;">
+    <h2 style="text-align: center; margin-top: 0; color: #2c3e50;">Create an Account</h2>
+    
+    <!-- Registration Form sending POST request to /register -->
+    <form method="POST" action="{{ url_for('register') }}">
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Username</label>
+            <input type="text" name="username" required autocomplete="off"
+                   style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Password</label>
+            <input type="password" name="password" required 
+                   style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 8px; font-weight: bold; color: #555;">Role</label>
+            <select name="role" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                <option value="" disabled selected>Select your role...</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        
+        <button type="submit" 
+                style="width: 100%; padding: 12px; background: #2ecc71; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;">
+            Register
+        </button>
+    </form>
+    
+    <div style="margin-top: 20px; text-align: center;">
+        <p>Already have an account? <a href="{{ url_for('login') }}" style="color: #3498db; text-decoration: none; font-weight: bold;">Login here</a></p>
+    </div>
+</div>
+{% endblock %}
